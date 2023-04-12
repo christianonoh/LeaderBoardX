@@ -1,0 +1,35 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeaderBoardX</title>
+<script defer src="runtime.bundle.js"></script><script defer src="main.bundle.js"></script></head>
+
+<body>
+  <div class="wrapper display-flex-column">
+    <header>
+      <h1>LeaderBoardX</h1>
+    </header>
+    <main class="main-container display-flex">
+      <section class="score-board-container display-flex-column">
+        <div class="score-board-header display-flex">
+          <h2>Recent scores</h2>
+          <button class="display-flex-column" id="refresh">Refresh</button>
+        </div>
+        <ul id="score-board"></ul>
+      </section>
+      <section class="add-score-container display-flex-column">
+        <h2>Add your score</h2>
+        <form class="display-flex-column">
+          <input type="text" placeholder="Your name" required name="name">
+          <input type="number" placeholder="Your score" required name="score">
+          <button id="submit-score" class="display-flex-column submit-score">Submit</button>
+        </form>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>
