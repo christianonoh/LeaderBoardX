@@ -17,3 +17,16 @@ const getSeverData = async () => {
   }
 };
 
+const deployScores = async () => {
+  scoreBoard.innerHTML = '';
+  const scoreObj = await getSeverData();
+  const { result } = await scoreObj;
+  result.sort((a, b) => b.score - a.score);
+  result.forEach((element) => {
+    const singleScore = document.createElement('li');
+    singleScore.setAttribute('class', 'score-item');
+    singleScore.innerHTML = `${element.user} : ${element.score}<br>`;
+    scoreBoard.appendChild(singleScore);
+  });
+};
+
