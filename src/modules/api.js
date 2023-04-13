@@ -30,3 +30,30 @@ const deployScores = async () => {
   });
 };
 
+const postData = async (data) => {
+  try {
+    const response = await fetch(topSpot, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    const apiResponse = await response.json();
+    feedbackMessage.textContent = apiResponse.result;
+  } catch (error) {
+    return error;
+  }
+  return null;
+};
+
+submitBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const userName = form.elements.user.value;
+  const userScore = form.elements.score.value;
+  postData({ user: userName, score: userScore });
+  form.elements.user.value = '';
+  form.elements.score.value = '';
+});
+
+refreshBtn.addEventListener('click', deployScores);
