@@ -5,6 +5,7 @@ const scoreBoard = document.getElementById('score-board');
 const form = document.querySelector('form');
 const feedbackMessage = document.querySelector('.feedback-message');
 
+// Get data from API
 const getSeverData = async () => {
   try {
     const response = await fetch(topSpot, {
@@ -17,6 +18,7 @@ const getSeverData = async () => {
   }
 };
 
+// Deploy data from API to browser
 const deployScores = async () => {
   scoreBoard.innerHTML = '';
   const scoreObj = await getSeverData();
@@ -30,6 +32,7 @@ const deployScores = async () => {
   });
 };
 
+// Add data to API
 const postData = async (data) => {
   try {
     const response = await fetch(topSpot, {
@@ -47,6 +50,7 @@ const postData = async (data) => {
   return null;
 };
 
+// Event listeners for buttons
 submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
   const userName = form.elements.user.value;
