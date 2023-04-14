@@ -4,6 +4,7 @@ const submitBtn = document.getElementById('submit-score');
 const scoreBoard = document.getElementById('score-board');
 const form = document.querySelector('form');
 const feedbackMessage = document.querySelector('.feedback-message');
+const giphy = document.querySelector('.giffy');
 
 // Get data from API
 const getSeverData = async () => {
@@ -21,14 +22,15 @@ const getSeverData = async () => {
 // Deploy data from API to browser
 const deployScores = async () => {
   scoreBoard.innerHTML = '';
+
   const scoreObj = await getSeverData();
   const { result } = await scoreObj;
   result.sort((a, b) => b.score - a.score);
   result.forEach((element) => {
-    const singleScore = document.createElement('li');
-    singleScore.setAttribute('class', 'score-item');
-    singleScore.innerHTML = `${element.user} : ${element.score}<br>`;
-    scoreBoard.appendChild(singleScore);
+    scoreBoard.innerHTML += `<li class="score-item">
+    <span class="user-name">${element.user}</span>
+    <span class="user-score">${element.score}</span>
+    </li><hr>`;
   });
 };
 
@@ -44,10 +46,18 @@ const postData = async (data) => {
     });
     const apiResponse = await response.json();
     feedbackMessage.textContent = apiResponse.result;
+    setTimeout(() => {
+      feedbackMessage.textContent = '';
+    }, 2000);
   } catch (error) {
     return error;
   }
   return null;
+};
+
+// Toggle giffy
+const toggleGiphy = () => {
+  giphy.classList.toggle('visible');
 };
 
 // Event listeners for buttons
@@ -60,4 +70,7 @@ submitBtn.addEventListener('click', (e) => {
   form.elements.score.value = '';
 });
 
-refreshBtn.addEventListener('click', deployScores);
+refreshBtn.addEventListener('click', () => {
+  deployScores();
+  toggleGiphy();
+});
