@@ -22,7 +22,7 @@ const getSeverData = async () => {
 // Deploy data from API to browser
 const deployScores = async () => {
   scoreBoard.innerHTML = '';
-  
+
   const scoreObj = await getSeverData();
   const { result } = await scoreObj;
   result.sort((a, b) => b.score - a.score);
@@ -46,6 +46,9 @@ const postData = async (data) => {
     });
     const apiResponse = await response.json();
     feedbackMessage.textContent = apiResponse.result;
+    setTimeout(() => {
+      feedbackMessage.textContent = '';
+    }, 2000);
   } catch (error) {
     return error;
   }
@@ -54,8 +57,8 @@ const postData = async (data) => {
 
 // Toggle giffy
 const toggleGiphy = () => {
-  giphy.classList.toggle('hidden');
-}
+  giphy.classList.toggle('visible');
+};
 
 // Event listeners for buttons
 submitBtn.addEventListener('click', (e) => {
